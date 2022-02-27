@@ -1,0 +1,14 @@
+.searcher {
+  width: 100%;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+}
+.searcher-bar {
+  width: 50%;
+  height: 30px;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  border-radius: 20px;
+  border: 2px solid rgb(28, 28, 138);
+}

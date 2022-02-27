@@ -1,0 +1,20 @@
+.menu-navBar {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+}
+.menu-button {
+  text-decoration: none;
+  color: blue;
+  font-size: 1.5rem;
+}
+
+img {
+  width: 35%;
+}
+
+.menu-button:hover {
+  color: blueviolet;
+}
