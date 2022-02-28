@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {getPokemonWithDetails} from '../../actions/actions'
+import { fetchPokemons } from '../../actions/actions';
 import Menu from '../../components/Menu/Menu';
 import PokemonList from '../../components/PokemonList/PokemonList';
 import SearchBar from '../../components/Searcher/Searcher';
@@ -14,7 +14,7 @@ function Home() {
   const list = useSelector(state => state.list);
 
   useEffect(() => {
-    dispatch(getPokemonWithDetails())
+    dispatch(fetchPokemons())
   }, []);
   return (
     <div className='Home'>
