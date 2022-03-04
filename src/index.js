@@ -8,7 +8,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { pokemonReducer } from './reducers/pokemonReducer';
 import { logActions, reportError } from './middlewares/index.jsx';
 
-const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose
+const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const composedEnhancers = composeAlt(
   applyMiddleware(thunk, logActions, reportError)

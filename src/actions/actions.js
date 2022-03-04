@@ -1,7 +1,5 @@
-import { SET_POKEMON, SET_ERROR, CLEAR_ERROR } from './type.jsx';
-import { getPokemons } from '../API/getPokemons.jsx';
-import axios from 'axios';
-
+import { SET_POKEMON, SET_ERROR, CLEAR_ERROR, TOGGLE_LOADING, SET_FAVORITE } from './type.jsx';
+import { getPokemons, getPokemonsWithDetails } from '../API/getPokemons.jsx';
 
 const setPokemons = (payload) => ({
   type: SET_POKEMON,
@@ -18,23 +16,27 @@ const clearError = (payload) => ({
   payload,
 });
 
+const toggleLoader = () => ({
+  type: TOGGLE_LOADING,
+});
 
-const POKEAPI = getPokemons();
+const setFavorite = (payload) => ({
+  type: SET_FAVORITE,
+  payload,
+});
 
-const getPokemonWithDetails = () => (dispatch) => {
-  POKEAPI
-  .then(data => {
-    const pokemonList = data.results;
-    return Promise.all(pokemonList.map((pokemon) => axios.get(pokemon.url))
-    );
-  })
-  .then((pokemonResponse) => {
-    const pokemonData = pokemonResponse.map(response => response.data)
-    dispatch(setPokemons(pokemonData))
-  })
-  .catch((error) => {
-  dispatch(setError({message: 'Ocurrio un error', error}))
-})
-};
+const fetchPokemonsWithDetails = () => async (dispatch) => {
+  try {
+    dispatch(toggleLoader());
+    const response = await getPokemons();
+    const pokemons = response.results;
+    const pokemonsWithDetails = await getPokemonsWithDetails(pokemons);
+    dispatch(setPokemons(pokemonsWithDetails));
+    dispatch(toggleLoader());
+  } catch (error) {
+    dispatch(setError({ message: 'Oops! Something went wrong', error }));
+    dispatch(toggleLoader())
+  }
+}
 
-export { setPokemons, setError, clearError, getPokemonWithDetails };
+export { setPokemons, setError, clearError, toggleLoader, setFavorite, fetchPokemonsWithDetails };

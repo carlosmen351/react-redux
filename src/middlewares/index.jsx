@@ -1,7 +1,6 @@
 import { SET_ERROR } from "../actions/type";
 
 const logActions = (store) => (next) => (actionInfo) => {
-  console.log('disparando', actionInfo);
   next(actionInfo);
 }
 
